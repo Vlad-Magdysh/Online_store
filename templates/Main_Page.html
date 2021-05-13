@@ -1,0 +1,174 @@
+<html>
+<head>
+	<title>Main_page</title>
+	<meta charset="utf-8">
+	<meta name="main_page" content="School">		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css_files/main_page_styles.css">		
+        <script type="text/javascript">
+            function user_background()
+            {
+                if (sessionStorage.getItem('logged_in'))
+                {
+                    document.getElementById('logout').style.display = 'block';
+                    document.body.style.background = '#F4C00A22';
+                }
+            }
+            function logout()
+            {
+                document.getElementById('logout').style.display = 'none';
+                document.body.style.background = 'white';
+                sessionStorage.removeItem('logged_in');
+            }
+            window.onload = user_background;
+        </script>
+     </head>
+ 
+     <body scroll = "yes" onLoad="user_background()">
+
+    <header>
+        <div title = "Школьная полка" class = "school-shelf"><!--Not empty block--></div>       
+        <nav class="top-nav">
+            <a href="Main_Page.html" class="guide">Главная</a>
+            <a href="Delivery_Page.html" class="guide">Оплата/Доставка</a>
+            <a href="News.html" class="guide">Новости</a>
+            <button type="button" id="logout" onclick="logout()">Выйти</button>     	
+			<form action="" class="search">
+				<input type="text" value autocomplete="off" placeholder="Поиск товара">
+				<button type="submit" value = "Поиск"><i class="fa fa-search"></i></button>
+		</form>			
+		</nav>	
+		<div class="users-icons">
+			<figure class = "figure-icons">
+                <a href="Contacts.html" class = "link-icon"><img src="css_files/images/phone-icon.png" alt=""></a>
+				<a href="Registration_page.html" class = "link-icon"><img src="css_files/images/contact-icon.png" alt=""></a>
+				<a href="Basket.html" class = "link-icon"><img src="css_files/images/basket-icon.png" alt=""></a>
+			</figure>
+		</div>
+	</header>
+		<hr style = "margin-top:10px;">
+		
+	<main>
+		<h1 style= "width: 240px;" class = "corp_name">Товары</h1>
+		<article class="advantages-container">
+      		<div class="advantages">
+        		<div class="advantages-item">
+        			<div class = "link-img"><a><img src="css_files/images/main_page/Stationery.jpg" alt="" /></a></div>
+        			<p class = "category-name">Канцтовары</p>
+        			<ul class = "rounded">
+        				<li><a href="#">Ручки, стержни</a></li>
+        				<li><a href="#">Маркеры</a></li>
+        				<li><a href="#">Корректоры</a></li>
+        				<li><a href="#">Циркули</a></li>
+        				<li><a href="#">Наборы черчения</a></li>
+        				<li><a href="#">Ножницы</a></li>
+        				<li><a href="#">Скотч</a></li>
+        			</ul>
+        		</div>
+        		<div class="advantages-item">
+        			<div class = "link-img"><a><img src="css_files/images/main_page/Schoolbag.jpg" alt="" /></a></div>
+        			<p class = "category-name">Портфели</p>
+        			<ul class="rounded">
+        				<li><a href="#">Ранцы</a></li>
+        				<li><a href="#">Рюкзаки</a></li>
+        				<li><a href="#">Сумки</a></li>
+        				<li><a href="#">Сумки для обуви</a></li>
+        			</ul>
+        		</div>
+        		<div class="advantages-item">
+        			<div class = "link-img"><a href = "Catalog_Template.html"><img src="css_files/images/main_page/Books.jpg" alt="" /></a></div>
+        			<p class = "category-name">Книги</p>
+        			<ul class="rounded">
+        				<li><a href="#">Энциклопедии</a></li>
+        				<li><a href="#">ГДЗ</a></li>
+        				<li><a href="#">ЗНО</a></li>
+        				<li><a href="#">Словари</a></li>
+        				<li><a href="#">Справочники</a></li>
+        				<li><a href="#">Сборники заданий</a></li>
+        				<li><a href="#">Классика</a></li>
+        			</ul>
+        		</div>
+        		<div class="advantages-item">
+        			<div class = "link-img"><a><img src="css_files/images/main_page/Creative.jpg" alt="" /></a></div>
+        			<p class = "category-name">Творчество</p>
+        			<ul class="rounded">
+        				<li><a href="#">Альбомы</a></li>
+        				<li><a href="#">Мел, пастель</a></li>
+        				<li><a href="#">Фломастеры</a></li>
+        				<li><a href="#">Карандаши</a></li>
+        				<li><a href="#">Полотна</a></li>
+        				<li><a href="#">Краски</a></li>
+        				<li><a href="#">Пластелин</a></li>
+        			</ul>
+        		</div>
+        		<div class="advantages-item">
+        			<div class = "link-img"><a><img src="css_files/images/main_page/Toys.jpg" alt="" /></a></div>
+        			<p class = "category-name">Игрушки</p>
+        			<ul class="rounded">
+        				<li><a href="#">Кинетический песок</a></li>
+        				<li><a href="#">Картины по номерам</a></li>
+        				<li><a href="#">Конструкторы<</a></li>
+        				<li><a href="#">Пазлы</a></li>
+        				<li><a href="#">Шахматы</a></li>
+        				<li><a href="#">Мягкие игрушки</a></li>
+        				<li><a href="#">Головоломки</a></li>
+        			</ul>
+        		</div>
+      </div>
+   </article>
+   	<article class="about-us-container">
+		<p><h1 class = "corp_name">О Нас </h1></p>	
+
+		<h3 style="margin-top: 20px;">
+            <p class = "text-design">Приветствуем вас на странице интернет-магазина <b>«Lab3»</b>. Уже более 10 лет наша компания успешно занимается торговлей канцелярских товаров и книг. В состав нашей фирмы входит сеть розничных магазинов и теперь мы рады представить всей Украине нашу онлайн витрину, где представлен широкий выбор канцелярских товаров, печатной продукции, товаров для творчества, умных игрушек и многое другое.</p>
+
+   <p class="text-design">Мы являемся представителями крупнейших производителей и импортеров канцелярских товаров, а также  книжных издательств, благодаря чему можем предложить <b>привлекательные цены</b>.</p>
+
+   <p class="text-design">Стратегия магазина <b>«Lab3»</b> строится на постоянном расширении и обновлении ассортимента. Для наших клиентов мы всегда можем предложить <b>качественные товары</b> и обеспечить комфортные условия сотрудничества.</p>
+
+   <p style="padding-top: 20px" class="text-design">Наша миссия:</p>
+
+<p class="text-design">- стать надежным и выгодным партнером;</p>
+
+<p class="text-design">- предоставить первоклассный сервис;</p>
+
+<p class="text-design">- достичь высокого уровня доверия; </p>
+
+<p class="text-design">- превзойти ожидания. </p>
+</h3>
+	</article>
+	</main>
+    <footer>
+        <div class="footer-block our-adress">
+            <p class="footer-category">Наш адресс</p>
+            <span class="footer-text">52001, г. Подгородное, ул.Геологов 193</span>
+            <a href="Contacts.html" class="footer-link">Смотреть на карте</a>
+        </div>
+        
+        <div class="footer-block our-contacts">
+            <p class="footer-category">Наши контакты</p>
+            <span class="footer-text">Email: shop@shop.com</span>
+            <span class="footer-text">Номер телефона: 012-234-56-78 </span>
+            <a href="Contacts.html" class="footer-link">Тех.поддержка</a>
+        </div>
+
+        <div class="footer-block our-information">
+            <p class="footer-category">Информация</p>
+            <a href="Privacy_Policy.html" class="footer-link">Политика конфиденциальности</a>
+            <a href="Delivery_Page.html" class="footer-link">Оплата/доставка</a>
+            <a href="News.html" class="footer-link">Новости</a>
+        </div>
+
+        <div class="footer-block our-user-profile">
+            <p class="footer-category">Для пользователя</p>
+            <a href="Basket.html" class="footer-link">Ваши заказы</a>
+            <a href="Registration_page.html" class="footer-link">Авторизация</a>
+            <a href="Registration_page.html" class="footer-link">Регистрация</a>
+        </div>
+    </footer>
+
+	
+
+
+</body>
+</html>
