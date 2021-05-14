@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="static/css/news_styles.css">
+
+{% endblock %}
+
+{% block content %}
+<h2 class="block-title">Новости</h2>
+<main>
+
+	{% for post in posts %}
+	<div class="stationery">
+		<img class = "stationery-image" src = "static/css/images/news/{{post.image}}"/>
+		<div class="stationery-taker"/>
+			<p class = "new-stationery"><a href = "" class="topic-link">{{post.title}}</a></p>
+			<p class = "text-design">{{post.date}}</p>
+			<p class = "text-design">{{post.description}}</p>
+		</div>
+	</div>
+	{% endfor %}
+</main>
+{% endblock %}

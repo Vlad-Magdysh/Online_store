@@ -1,59 +1,20 @@
-<html>
-<head>
-	<title>Main_page</title>
-	<meta charset="utf-8">
-	<meta name="main_page" content="School">		
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css_files/main_page_styles.css">		
-        <script type="text/javascript">
-            function user_background()
-            {
-                if (sessionStorage.getItem('logged_in'))
-                {
-                    document.getElementById('logout').style.display = 'block';
-                    document.body.style.background = '#F4C00A22';
-                }
-            }
-            function logout()
-            {
-                document.getElementById('logout').style.display = 'none';
-                document.body.style.background = 'white';
-                sessionStorage.removeItem('logged_in');
-            }
-            window.onload = user_background;
-        </script>
-     </head>
- 
-     <body scroll = "yes" onLoad="user_background()">
+{% extends "base.html" %}
 
-    <header>
-        <div title = "Школьная полка" class = "school-shelf"><!--Not empty block--></div>       
-        <nav class="top-nav">
-            <a href="Main_Page.html" class="guide">Главная</a>
-            <a href="Delivery_Page.html" class="guide">Оплата/Доставка</a>
-            <a href="News.html" class="guide">Новости</a>
-            <button type="button" id="logout" onclick="logout()">Выйти</button>     	
-			<form action="" class="search">
-				<input type="text" value autocomplete="off" placeholder="Поиск товара">
-				<button type="submit" value = "Поиск"><i class="fa fa-search"></i></button>
-		</form>			
-		</nav>	
-		<div class="users-icons">
-			<figure class = "figure-icons">
-                <a href="Contacts.html" class = "link-icon"><img src="css_files/images/phone-icon.png" alt=""></a>
-				<a href="Registration_page.html" class = "link-icon"><img src="css_files/images/contact-icon.png" alt=""></a>
-				<a href="Basket.html" class = "link-icon"><img src="css_files/images/basket-icon.png" alt=""></a>
-			</figure>
-		</div>
-	</header>
-		<hr style = "margin-top:10px;">
-		
+{% block styles %}
+
+<link rel="stylesheet" type="text/css" href="static/css/main_page_styles.css">
+
+{% endblock%}
+
+{% block content %}
 	<main>
 		<h1 style= "width: 240px;" class = "corp_name">Товары</h1>
 		<article class="advantages-container">
       		<div class="advantages">
         		<div class="advantages-item">
-        			<div class = "link-img"><a><img src="css_files/images/main_page/Stationery.jpg" alt="" /></a></div>
+        			<div class = "link-img">
+                        <a><img src="static/css/images/main_images/Stationery.jpg" alt="" /></a>
+                    </div>
         			<p class = "category-name">Канцтовары</p>
         			<ul class = "rounded">
         				<li><a href="#">Ручки, стержни</a></li>
@@ -66,7 +27,7 @@
         			</ul>
         		</div>
         		<div class="advantages-item">
-        			<div class = "link-img"><a><img src="css_files/images/main_page/Schoolbag.jpg" alt="" /></a></div>
+        			<div class = "link-img"><a><img src="static/css/images/main_images/Schoolbag.jpg" alt="" /></a></div>
         			<p class = "category-name">Портфели</p>
         			<ul class="rounded">
         				<li><a href="#">Ранцы</a></li>
@@ -76,7 +37,9 @@
         			</ul>
         		</div>
         		<div class="advantages-item">
-        			<div class = "link-img"><a href = "Catalog_Template.html"><img src="css_files/images/main_page/Books.jpg" alt="" /></a></div>
+        			<div class = "link-img">
+                        <a href = "Catalog_Template.html"><img src="static/css/images/main_images/Books.jpg" alt="" /></a>
+                    </div>
         			<p class = "category-name">Книги</p>
         			<ul class="rounded">
         				<li><a href="#">Энциклопедии</a></li>
@@ -89,7 +52,9 @@
         			</ul>
         		</div>
         		<div class="advantages-item">
-        			<div class = "link-img"><a><img src="css_files/images/main_page/Creative.jpg" alt="" /></a></div>
+        			<div class = "link-img">
+                        <a><img src="static/css/images/main_images/Creative.jpg" alt="" /></a>
+                    </div>
         			<p class = "category-name">Творчество</p>
         			<ul class="rounded">
         				<li><a href="#">Альбомы</a></li>
@@ -102,7 +67,9 @@
         			</ul>
         		</div>
         		<div class="advantages-item">
-        			<div class = "link-img"><a><img src="css_files/images/main_page/Toys.jpg" alt="" /></a></div>
+        			<div class = "link-img">
+                        <a><img src="static/css/images/main_images/Toys.jpg" alt="" /></a>
+                    </div>
         			<p class = "category-name">Игрушки</p>
         			<ul class="rounded">
         				<li><a href="#">Кинетический песок</a></li>
@@ -138,37 +105,5 @@
 </h3>
 	</article>
 	</main>
-    <footer>
-        <div class="footer-block our-adress">
-            <p class="footer-category">Наш адресс</p>
-            <span class="footer-text">52001, г. Подгородное, ул.Геологов 193</span>
-            <a href="Contacts.html" class="footer-link">Смотреть на карте</a>
-        </div>
-        
-        <div class="footer-block our-contacts">
-            <p class="footer-category">Наши контакты</p>
-            <span class="footer-text">Email: shop@shop.com</span>
-            <span class="footer-text">Номер телефона: 012-234-56-78 </span>
-            <a href="Contacts.html" class="footer-link">Тех.поддержка</a>
-        </div>
 
-        <div class="footer-block our-information">
-            <p class="footer-category">Информация</p>
-            <a href="Privacy_Policy.html" class="footer-link">Политика конфиденциальности</a>
-            <a href="Delivery_Page.html" class="footer-link">Оплата/доставка</a>
-            <a href="News.html" class="footer-link">Новости</a>
-        </div>
-
-        <div class="footer-block our-user-profile">
-            <p class="footer-category">Для пользователя</p>
-            <a href="Basket.html" class="footer-link">Ваши заказы</a>
-            <a href="Registration_page.html" class="footer-link">Авторизация</a>
-            <a href="Registration_page.html" class="footer-link">Регистрация</a>
-        </div>
-    </footer>
-
-	
-
-
-</body>
-</html>
+{% endblock %}

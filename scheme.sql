@@ -32,3 +32,11 @@ CREATE TABLE letters (
     description TEXT ,
     status INTEGER
 );
+
+CREATE TABLE news (
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    title TEXT ,
+    image TEXT ,
+    date TEXT ,
+    description TEXT
+);

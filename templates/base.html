@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Main_page</title>
+	<meta charset="UTF-8">
+	<meta name="main_page" content="School">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="static/css/base_styles.css">
+    {% block styles %} {% endblock %} 		
+        <script type="text/javascript">
+            function user_background()
+            {
+                if (sessionStorage.getItem('logged_in'))
+                {
+                    document.getElementById('logout').style.display = 'block';
+                    document.body.style.background = '#F4C00A22';
+                }
+            }
+            function logout()
+            {
+                document.getElementById('logout').style.display = 'none';
+                document.body.style.background = 'white';
+                sessionStorage.removeItem('logged_in');
+            }
+            window.onload = user_background;
+        </script>
+     </head>
+ 
+<body scroll = "yes" onLoad="user_background()">
+
+    <header>
+        <div title = "Школьная полка" class = "school-shelf"><!--Not empty block--></div>       
+        <nav class="top-nav">
+            <a href="/" class="guide">Главная</a>
+            <a href="/delivery-info" class="guide">Оплата/Доставка</a>
+            <a href="/news" class="guide">Новости</a>
+            <button type="button" id="logout" onclick="logout()">Выйти</button>     	
+			<form action="" class="search">
+				<input type="text" value autocomplete="off" placeholder="Поиск товара">
+				<button type="submit" value = "Поиск"><i class="fa fa-search"></i></button>
+		</form>			
+		</nav>	
+		<div class="users-icons">
+			<figure class = "figure-icons">
+                <a href="Contacts.html" class = "link-icon">
+                    <img src="static/css/images/header/phone-icon.png" alt="">
+                </a>
+				<a href="Registration_page.html" class = "link-icon">
+                    <img src="static/css/images/header/contact-icon.png" alt="">
+                </a>
+				<a href="Basket.html" class = "link-icon">
+                    <img src="static/css/images/header/basket-icon.png" alt="">
+                </a>
+			</figure>
+		</div>
+	</header>
+		<hr style = "margin-top:10px;">
+
+        {% block content %}{% endblock %}
+
+<footer>
+        <div class="footer-block our-adress">
+            <p class="footer-category">Наш адресс</p>
+            <span class="footer-text">52001, г. Подгородное, ул.Геологов 193</span>
+            <a href="Contacts.html" class="footer-link">Смотреть на карте</a>
+        </div>
+        
+        <div class="footer-block our-contacts">
+            <p class="footer-category">Наши контакты</p>
+            <span class="footer-text">Email: shop@shop.com</span>
+            <span class="footer-text">Номер телефона: 012-234-56-78 </span>
+            <a href="Contacts.html" class="footer-link">Тех.поддержка</a>
+        </div>
+
+        <div class="footer-block our-information">
+            <p class="footer-category">Информация</p>
+            <a href="Privacy_Policy.html" class="footer-link">Политика конфиденциальности</a>
+            <a href="Delivery_Page.html" class="footer-link">Оплата/доставка</a>
+            <a href="News.html" class="footer-link">Новости</a>
+        </div>
+
+        <div class="footer-block our-user-profile">
+            <p class="footer-category">Для пользователя</p>
+            <a href="Basket.html" class="footer-link">Ваши заказы</a>
+            <a href="Registration_page.html" class="footer-link">Авторизация</a>
+            <a href="Registration_page.html" class="footer-link">Регистрация</a>
+        </div>
+    </footer>
+
+    
+
+
+</body>
+</html>
