@@ -67,5 +67,38 @@ def news():
     return render_template('news.html', posts=posts)
 
 
+@app.route('/catalog-<string:product_type>')
+def catalog(product_type):
+    query = f"""
+    SELECT weight, name 
+    FROM filters
+    WHERE product == '{product_type}' AND category == 'kind'
+    """
+    db_cursor = get_db().cursor()
+    db_cursor.execute(query)
+    kinds = db_cursor.fetchall()
+
+    query = f"""
+    SELECT weight, name 
+    FROM filters
+    WHERE product == '{product_type}' AND category == 'country'
+    """
+    db_cursor.execute(query)
+    countries = db_cursor.fetchall()
+
+    query = f"""
+    SELECT image, name, price
+    FROM products
+    WHERE category== '{product_type}'
+    """
+    db_cursor.execute(query)
+    products = db_cursor.fetchall()
+
+    for item in products:
+        item['image'] = f"{product_type}/{item.get('image', '')}"
+
+    return render_template("catalog_template.html", kinds=kinds, countries=countries, products=products)
+
+
 if __name__ == '__main__':
     app.run()

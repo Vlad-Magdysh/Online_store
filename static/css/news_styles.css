@@ -12,6 +12,7 @@
 
 .stationery-image{
 	width:300px;
+	border: 1px solid grey;
 }
 
 main{
@@ -32,8 +33,8 @@ main{
 
 .stationery{
 	display: flex;
-	width:100%;
-	padding: 2%;
+	width:98%;
+	margin: 20px 0px 20px 2%;
 }
 
 .topic-link:hover{

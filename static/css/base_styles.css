@@ -204,13 +204,60 @@ footer{
 	justify-content: space-around;
 }
 
+.users-icons
+{
+	margin: -50px 0 0 30px; 
+	width: 180px;
 }
 
-@media screen and (max-width: 600px){
+.figure-icons
+{
+	width: 180px;
+}
 
 .link-icon img{
 	height: 50px;
 	width: 50px;
+}
+
+}
+
+@media screen and (max-width: 600px){
+
+
+.users-icons
+{ 
+	width: 70px;
+	height: 130px;
+}
+
+.figure-icons
+{
+	margin-top: 20px;
+	width: 70px;
+	height: 130px;
+}
+
+.figure-icons a
+{	
+	margin-right: 9px;
+	margin-top: 5px;
+}
+
+
+.link-icon img{
+	height: 45px;
+	width: 45px;
+}
+
+
+}
+
+@media screen and (max-width: 500px){
+
+.link-icon img{
+	height: 40px;
+	width: 40px;
 }
 
 }

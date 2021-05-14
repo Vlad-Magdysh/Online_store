@@ -10,8 +10,10 @@ CREATE TABLE users (
 
 CREATE TABLE products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image TEXT,
     category TEXT NOT NULL,
     name TEXT NOT NULL,
+    price INTEGER,
     quantity INTEGER,
     country TEXT NOT NULL,
     description TEXT
@@ -39,4 +41,12 @@ CREATE TABLE news (
     image TEXT ,
     date TEXT ,
     description TEXT
+);
+
+CREATE TABLE filters(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  product TEXT NOT NULL ,
+  category TEXT NOT NULL ,
+  name TEXT NOT NULL ,
+  weight TEXT
 );
