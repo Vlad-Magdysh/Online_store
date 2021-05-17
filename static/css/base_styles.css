@@ -192,7 +192,38 @@ footer{
 	display: list-item;
 }
 
+.corp_name{
+	font-family: "Font-Awesome", "Trebuchet MS", "Lucida Sans";
+	max-width: 360px;
+	padding: 10px 20px;
+	background-color: #90806A;
+	color: white;
+	margin: 0 auto;
+	text-align: center;
+	border-radius: 8px;
+	border-bottom: 5px solid grey;
+}
 
+.text-title{
+	font: 24px "Trebuchet MS", "Lucida Sans";
+	line-height: 50px;
+	font-weight: 800;
+	margin-top: 10px;
+}
+
+.text-design{
+	font: 18px "Trebuchet MS", "Lucida Sans";
+	line-height: 24px;
+	text-indent: 20px;
+}
+
+.flask-alert{
+	color: #2670D8FF;
+	font: 20px "Trebuchet MS", "Lucida Sans";
+	line-height: 32px;
+	padding: 2px;
+	border: 1px solid grey;
+}
 
 @media screen and (max-width: 700px){
 

@@ -51,7 +51,7 @@
 				<div class="items-container">
 					{% for item in products %}
 					<div class="product-item">
-						<a href="" class="product-link">
+						<a href="/product-{{item.id}}" class="product-link">
 							<div class="product-link-body">
 								<img src="static/css/images/{{ item.image }}" alt="">
 								<p class="product-name">{{ item.name }}</p>

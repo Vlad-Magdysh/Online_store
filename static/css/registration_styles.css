@@ -1,0 +1,115 @@
+.forms-block{
+	display: flex;
+	justify-content: center;
+}
+
+#registration-block{
+	width: 95%;
+	max-width: 800px;
+	min-width: 320px;
+	display:flex;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #f4f4f4;
+	font-family: "Font-Awesome", "Trebuchet MS", "Lucida Sans";
+}
+
+.user-fields-block{
+	width: 100%;
+	display:flex;
+	justify-content: space-between;
+}
+
+.user-fields-block input{
+	font-size:18px;
+	width: 180px;
+	height: 40px;
+	line-height: 20px;
+}
+
+.field-title{
+	font-size:20px;
+	padding-bottom: 10px;
+}
+
+#authorization-block
+{
+		width: 95%;
+	max-width: 800px;
+	min-width: 320px;
+	display:none;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #f4f4f4;
+	font-family: "Font-Awesome", "Trebuchet MS", "Lucida Sans";
+
+}
+
+#submit-block
+{
+	padding-left: 38%;
+	padding-bottom: 40px;
+}
+
+#submit-registration{
+	width: 150px;
+	padding: 4px 8px;
+	font-size:18px;
+	background-color: #EC8989;
+	color:white;
+	border-color: #9B9B9B;
+}
+
+#submit-authorization
+{
+	width: 150px;
+	padding: 4px 8px;
+	font-size:18px;
+	background-color: #64d1ca;
+	color:white;
+	border-color: #9B9B9B;
+}
+
+.field-title span{
+	color:red;
+}
+
+.user-reg-auth-block{
+	display: block;
+	width: 440px;
+	margin: 0 auto;
+	padding-bottom: 40px;
+}
+
+
+#registration-check{
+	display: inline;
+	width: 200px;
+	padding: 6px 12px;
+	font-size:28px;
+	background-color: #EC8989;
+	color:white;
+	border: 3px solid #9B9B9B00;
+}
+
+#registration-check:focus{
+	border-color: #1AE47EFF;
+}
+
+#authentication-check{
+	display: inline;
+	width: 200px;
+	padding: 6px 12px;
+	font-size:28px;
+	background-color: #64d1ca;
+	color:white;
+	border: 3px solid #9B9B9B00;
+}
+
+#authentication-check:focus{
+	border-color: #F1AF0DFF;
+}
+
+.forms-block{
+	margin-bottom: 50px;
+}

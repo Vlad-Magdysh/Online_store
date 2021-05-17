@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="static/css/registration_styles.css">
+{% endblock %}
+
+{% block content %}
+<script type="text/javascript">
+function ShowRegister()
+{
+	document.getElementById('authorization-block').style.display = 'none';
+	document.getElementById('registration-block').style.display = 'flex';
+}
+
+function ShowAuth()
+{
+	document.getElementById('authorization-block').style.display = 'flex';
+	document.getElementById('registration-block').style.display = 'none';
+}
+
+function SaveData()
+{
+	sessionStorage.setItem('name', document.getElementById('name').value)
+	sessionStorage.setItem('surname', document.getElementById('surname').value)
+	sessionStorage.setItem('city', document.getElementById('city').value)
+	sessionStorage.setItem('mail-index', document.getElementById('mail-index').value)
+	sessionStorage.setItem('phone-number', document.getElementById('phone-number').value)
+	sessionStorage.setItem('email', document.getElementById('email').value)
+}
+
+function UploadData()
+{
+	if (sessionStorage.getItem('name') !== null)
+	{
+		document.getElementById('name').value = sessionStorage.getItem('name');
+	}
+	if (sessionStorage.getItem('surname') !== null)
+	{
+		document.getElementById('surname').value = sessionStorage.getItem('surname');
+	}
+	if (sessionStorage.getItem('city') !== null)
+	{
+		document.getElementById('city').value = sessionStorage.getItem('city');
+	}
+	if (sessionStorage.getItem('mail-index') !== null)
+	{
+		document.getElementById('mail-index').value = sessionStorage.getItem('mail-index');
+	}
+	if (sessionStorage.getItem('phone-number') !== null)
+	{
+		document.getElementById('phone-number').value = sessionStorage.getItem('phone-number');
+	}
+	if (sessionStorage.getItem('email') !== null)
+	{
+		document.getElementById('email').value = sessionStorage.getItem('email');
+	}	
+}
+window.onload = UploadData;
+</script>
+<main>
+	<div class="user-reg-auth-block">
+		<button type="button" id="registration-check" onclick="ShowRegister()">Регистрация</button>
+		<button type="button" id="authentication-check" onclick="ShowAuth()">Авторизация</button>
+	</div>
+	<div class="forms-block">
+	<div id="registration-block">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				{% for alert in messages %}
+					<p class="flask-alert">{{alert}}</p>
+				{% endfor %}
+			{% endif %}
+			{% endwith %}
+		<form action="/registration" method="POST">
+			<div class="user-fields-block">
+				<div class="field-block user-first-name">
+					<p class="field-title">Имя<span>*</span></p>
+					<input type="text" value="" id="name" name="name" placeholder="Name">
+				</div>
+				<div class="field-block user-second-name-block">
+					<p class="field-title">Фамилия<span>*</span></p>
+					<input type="text" value="" id="surname" name="surname" placeholder="Surname">
+				</div>
+			</div>
+			<div class="user-fields-block">
+				<div class="field-block">
+					<p class="field-title">Город<span>*</span></p>
+					<input type="text" value="" id="city" name="city" placeholder="City">
+				</div>
+				<div class="field-block">
+					<p class="field-title">Почтовый индекс<span>*</span></p>
+					<input type="text" value="" id="mail-index" name="mail_index" placeholder="01234">
+				</div>
+			</div>
+
+			<div class="user-fields-block">
+				<div class="field-block">
+					<p class="field-title">Номер телефона<span>*</span></p>
+					<input type="text" id="phone-number" value="+38" name="phone">
+				</div>
+				<div class="field-block">
+					<p class="field-title">Почта<span>*</span></p>
+					<input type="text" value="" id="email" name="email" placeholder="mail@mail.com">
+				</div>
+			</div>
+
+			<div class="user-fields-block">
+				<div class="field-block">
+					<p class="field-title">Пароль<span>*</span></p>
+					<input type="password" id="password" name="password">
+				</div>
+				<div class="field-block">
+					<p class="field-title">Повторите пароль<span>*</span></p>
+					<input type="password" id="confirmed" name="confirmed">
+				</div>
+			</div>
+			<div id="submit-block"><button id="submit-registration" onclick="SaveData()" type="submit">Отправить</button></div>
+		</form>
+	</div>
+
+		<div id="authorization-block">
+		<form action="/authorization", method="POST">
+			<div class="user-fields-block">
+				<div class="field-block">
+					<p class="field-title">Почта<span>*</span></p>
+					<input type="text" id="auth-email" name="email">
+				</div>
+				<div class="field-block">
+					<p class="field-title">Пароль<span>*</span></p>
+					<input type="text" id="auth-password" name="password">
+				</div>
+			</div>
+
+			<div id="submit-block"><button type="submit" id="submit-authrorization">Отправить</button></div>
+		</form>
+	</div>
+	</div>
+</main>
+
+{% endblock %}

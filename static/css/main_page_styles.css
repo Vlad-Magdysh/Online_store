@@ -6,18 +6,6 @@ main
 	width: 100%;
 }
 
-.corp_name{
-	font-family: "Font-Awesome", "Trebuchet MS", "Lucida Sans";
-	max-width: 360px;
-	padding: 10px 20px;
-	background-color: #90806A;
-	color: white;
-	margin: 0 auto;
-	text-align: center;
-	border-radius: 8px;
-	border-bottom: 5px solid grey;
-}
-
 .advantages-container{
 	display:flex;
 	justify-content:center;

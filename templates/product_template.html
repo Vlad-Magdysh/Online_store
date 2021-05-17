@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+	{% block styles %}
+
+	<link rel="stylesheet" href="static/css/product_template_styles.css">
+
+	{% endblock %}
+
+	{% block content %}
+	<main>	
+		<!-- Add some achors -->
+		<article class="product-container">
+			<div class="product-body-block">
+				<div class="product-img-block">
+					<img src="static/css/images/{{product.image }}" alt="">
+
+				</div>
+				<div class="product-info-buy-block">
+					<p id="product-available"><span style="padding-left: 5px; margin-top: 10px;">&#9989;</span><span style="padding-left: 10px">{{product.quantity}} в наличии</span></p>
+					<p id="product-price">{{product.price}}.00 грн</p>
+					<div id="product-counter-buy">
+						<form action="product-{{product.id}}" method="POST">
+						<p id="counter">
+							Количество:
+							<input id="prod_number" name="prod_number" type="text" value="1">
+							<button type="button" onclick="CounterUp()" id="counter-up" value="{{product.quantity}}">+</button>
+							<button type="button" onclick="CounterDown()" id="counter-down">-</button>
+							шт
+						</p>
+						<div class="buy-block"><button type="submit" name="{{product.id}}" value="{{product.quantity}}">Купить</button></div>
+						</form>
+					</div>
+					<p id="product-id">Код товара: {{product.id}}</p>
+				</div>
+			</div>
+		</article>
+		<div class="product-description-block">
+				<div class="product-links">
+					<button type="button" class="prod-link description-link" onclick="ShowBlock(1)">Описание</button>
+					<button type="button" class="prod-link feature-link" onclick="ShowBlock(2)">Характеристики</a>
+				</div>
+					<div id="block1">
+						<p class="text-design">{{product.description}}</p>
+
+					</div>
+					<div id="block2">
+						<ul>
+							<li>{{product.name}}</li>
+							<li>Страна производитель: {{product.country}}</li>
+							<li>Код: {{product.id}}</li>
+						</ul>
+					</div>
+		</div>
+	</main>
+	    <script>
+    	function ShowBlock(number)
+		{
+			if(document.getElementById('block'+number.toString()).style.display == 'block')
+			{
+				document.getElementById('block'+number.toString()).style.display = 'none'
+			}
+			else{
+			document.getElementById('block'+number.toString()).style.display = 'block';
+			}
+		}
+		
+		function CounterUp()
+		{
+			if(Number(document.getElementById('counter-up').value) > Number(document.getElementById('prod_number').value))
+			{
+				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) +1;
+			}
+		}
+
+		function CounterDown()
+		{
+			if (Number(document.getElementById('prod_number').value) > 1)
+			{
+				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) - 1;
+			}
+		}
+  
+    	</script>
+	{% endblock %}

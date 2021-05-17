@@ -1,0 +1,117 @@
+
+
+/*Main*/
+
+.main-body{
+	width:100%;
+	max-width:1600px;
+	margin:0 auto;
+	font-family: "Font-Awesome", "Trebuchet MS", "Lucida Sans";
+}
+
+.contacts_block{
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	width:100%;
+	margin-bottom: 3%;
+	justify-content:space-around;
+	padding: 3px;
+}
+
+.data_container{
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	background:#f4f4f4;
+	margin-bottom: 30px;
+}
+
+.title-block{
+	padding: 20px 0;
+}
+
+.title-block img{
+	display: block;
+	float: left;
+}
+
+.our_contacts{
+	margin-left: 20px;
+	width: 320px;
+}
+
+.info_image{
+	width:40px;
+	margin:3%;
+}
+
+.feedback{
+	width:60%;
+	max-width: 680px;
+	min-width: 480px;
+	background:#f4f4f4;
+	display:flex;
+	flex-direction:column;
+	box-sizing: border-box;
+	padding:2%;
+	min-height:600px;
+}
+
+.feedback form{
+	display: block;
+	margin: 0 auto;
+	font: 16px "Trebuchet MS", "Lucida Sans";
+	line-height: 24px;
+}
+
+.feedback form input{
+	font-size: 18px;
+	height: 24px;
+	line-height: 30px;
+}
+
+.see-map{
+	margin-right:49%;
+}
+
+.long-form{
+	width:400px;
+}
+
+.math-input{
+	width:60px;
+	
+}
+
+.contact-field{
+	padding: 20px 0;
+}
+
+.our-contacts-script{
+	margin-left:3%;
+	margin-top:3%;
+}
+
+.submit-button{
+	background:#50c8c0;
+	font-size: 18px;
+	color:white;
+	border:none;
+	width:180px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.submit-button:hover
+{
+	cursor: pointer;
+}
+
+#map{
+	width:100%;
+	height:70%;
+	margin-bottom:2%;
+}
+

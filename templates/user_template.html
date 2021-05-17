@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="static/css/user_template_styles.css">
+{% endblock %}
+
+{% block content %}
+	 <script type="text/javascript">
+		  history_button.onclick = function() {
+			 	if(document.getElementById('order-table').style.display == 'block')
+				{
+					document.getElementById('order-table').style.display = 'none';
+				}
+				else{
+				document.getElementById('order-table').style.display = 'block';
+				}
+		  };
+
+		   delete_button.onclick = function() {
+		   	var win = window.open('Pop_up.html', 'Are you shure?', 'width=500, height=200');
+		  };
+	</script>
+		<div class = "main-body">
+			<img title = "User_Avatar" class = "user-avatar" src = "css_files\images\user_page\user.png">
+				<text class = "user-page-script">Страница пользователя</text>
+					<text class = "user-line">Имя:<i>{{ person.name }}</i>, Фамилия:<i>{{ person.surname }}</i></text>
+					<text class = "user-line">Почта:<i>{{ person.email }}</i>, Номер телефона:<i>{{ person.phone }}</i></text>
+					<text class = "user-line">Город:<i>{{ person.city }}</i>, Почтовый индекс:<i>{{ person.mail_index }}</i></text>
+
+					<div class = "button-taker">
+						<input id="history_button" type="button" value="История заказов">
+						<input id="delete_button" type="button" value="Удалить аккаунт">
+					</div>
+
+					<table id="order-table" width="320px">
+						<tr>
+							<td>Номер заказа</td>
+							<td>Статус</td>
+						</tr>
+						{% for order in orders %}
+						<tr>
+							<td>Заказ №{{order.id}}</td>
+							{% if order.status == 0 %}
+							<td>Не готов</td>
+							{% elif order.status == 1 %}
+							<td>В пути</td>
+							{% elif order.status == 2 %}
+							<td>Готово</td>
+							{% elif order.status == 3 %}
+							<td>Отменён</td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+					</table>
+        </div>
+{% endblock %}

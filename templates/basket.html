@@ -1,0 +1,126 @@
+	{% extends "base.html" %}
+
+	{% block styles %}
+	<link rel="stylesheet" href="static/css/basket_styles.css">
+	{% endblock %}
+	
+	{% block content %}
+		 <div class = "main-body">
+
+		 	<h2 class = "basket-script">Корзина</h2>
+
+		 	<div class = "basket-interface">
+				<span class = "goods-span"><b>Товары в корзине({{ len }})</b>
+					<span class = "ready-button">Готовые к заказу({{ len }})</span>
+				</span>
+			</div> 
+
+			<table border = "1" class = "goods-table" width = "100%">
+
+				<tr width = "100%">
+					<td class = "long-column">
+						<h3>Товары</h3>
+					</td>
+						
+					<td class = "short-column">
+						<h3>Цена</h3>
+					</td>
+
+					<td class = "short-column">
+						<h3>Количество</h3>
+					</td>
+
+					<td class = "short-column">
+						<h3>Сумма</h3>
+					</td>
+
+					<td class = "short-column">
+						<h3>Действие</h3>
+					</td>
+				</tr>
+				{% for item in products %}
+				<tr>
+					<td class = "long-white-column">
+						<div class = "good-taker">
+							<img class = "diary-img" src = "static/css/images/{{item.image}}"/>
+								<div class = "good-container">
+									<h3 align = "left"><font color = "#6f8da9">{{item.name}}<br>Страна: {{item.country}}</h3>							
+								</font>
+							</div>
+						</div>
+					</td>
+
+					<td valign="top" class = "short-white-column">
+						<div class = "price-taker">
+							<h3 class = "price-script">{{item.price}}</h3>
+							<h3 class = "price-script"> грн</h3>
+						</div>
+					</td>
+
+					<td valign="top" class = "short-white-column">
+							<div class = "amount-taker">
+								
+								<div class = "amount-block">
+									<p id="counter">
+									Количество:
+									<input id="prod_number" name="prod_number" type="text" value="{{item.number}}">
+								<button type="button" onclick="CounterUp()" id="counter-up" value="{{item.quantity}}">+</button>
+								<button type="button" onclick="CounterDown()" id="counter-down">-</button>
+									шт
+									</p>
+
+								<div class = "status-block">
+									<h3 class = "status-script">Статус:</h3>\
+									{% if item.quantity > 0 %}
+									<h3 class = "in-stock">есть в наличии</h3>
+									{% else %}
+									<h3 class = "in-stock">нет в наличии</h3>
+									{% endif %}
+								</div>
+						</div>
+					</td>
+
+					<td valign="top" class = "short-white-column">
+						<div class = "sum-taker">
+							<h3 class = "price-script"> 10.00</h3>
+							<h3 class = "price-script"> грн</h3>
+						</div>
+					</td>
+
+					<td valign="top" class = "short-white-column">
+						<div class = "action-taker">
+							<button class = "delete-button"><b>Удалить</b></button>
+						</div>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+
+			<div class = "report-block">
+				<button class = "report-button"><a href = "Contacts.html" id= "report-link">Сообщить об ошибке</button></a>
+				<span>
+					<text class = "outcome-script"><b>Итого:</b></text><text class = "outcome-price"> 29.30</text><text class = "uah"> грн.</text>
+				</span>
+			</div>
+
+			<button class = "min-order" align = "right">Минимальный заказ на сумму от 100 грн. Вас осталось добрать ещё 70.7 грн.</button>
+		</div>
+	<script>
+				
+		function CounterUp()
+		{
+			if(Number(document.getElementById('counter-up').value) > Number(document.getElementById('prod_number').value))
+			{
+				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) +1;
+			}
+		}
+
+		function CounterDown()
+		{
+			if (Number(document.getElementById('prod_number').value) > 1)
+			{
+				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) - 1;
+			}
+		}
+	</script>
+{% endblock %}

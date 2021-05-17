@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="static/css/contacts_styles.css">
+{% endblock %}
+
+{% block content %}
+		 <div class = "main-body">
+			<h1 style="width: 260px;" class="corp_name"> Тех.поддержка </h1>
+			<div id="map">	</div>
+			
+			<div class = "big_headers">			
+			</div>
+			
+			<div class = "contacts_block">
+
+				<div class = "our_contacts">
+						<h2 style="margin-bottom: 20px;"><b>Наши контакты:</b></h2>		
+						<div class = "data_container">					
+							<div class = "title-block">
+								 <img class ="info_image" src = "static/css/images/contact-us/location.png">
+								 <h4 style="padding-top: 18px">Смотреть на карте</h4>
+							</div>
+							
+							<div class = "title-block">
+								 <img class ="info_image" src = "static/css/images/contact-us/email.png">
+								 <h4 style="padding-top: 18px";>email:</h4>
+							</div>
+							
+							<div class = "title-block">
+								 <img class ="info_image" src = "static/css/images/contact-us/time.png">
+								 <h4 style="padding-top: 10px;">Работаем: пн-пт: 9:00 до 18:00<br> через корзину круглосуточно</h4>
+							</div>
+							
+							<div class = "title-block">
+								 <img class ="info_image" src = "static/css/images/contact-us/phone.png">
+								 <h4 style="padding-top: 18px">Тел ...</h4>
+							</div>
+							
+						</div>
+				</div>
+				<div class = "feedback">
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for alert in messages %}
+							<p class="flask-alert">{{alert}}</p>
+						{% endfor %}
+					{% endif %}
+					{% endwith %}
+					<form action="" method="POST">
+					  <div class="contact-field"><text>Ваше имя<font color = "red">*</font></text><br>				
+					  <input type="text" class = "long-form" autocomplete = "off" name="name"><br></div>
+					  
+					  <div class="contact-field">
+					  <text>Телефон<font color = "red">*</font></text>	<br>				  
+					  <input type="text" class = "long-form" autocomplete = "off" name="phone"><br>
+					   </div>
+					  
+					  <div class="contact-field">
+					  <text>Ваш email<font color = "red">*</font></text><br>
+					  <input type="email" class = "long-form" autocomplete = "off" name="email"><br>
+					</div>
+					
+					<div class="contact-field">  
+					  <text>Сообщение<font color = "red">*</font></text><br>
+					  <textarea class = "long-form" autocomplete = "off" name="message"> </textarea><br>		
+					</div>
+
+					<div class="contact-field">
+					  <text><b>Защита от автоматических сообщений:</b><br></text>
+					  <text><b>Введите результат математичской операции</b></text><br>
+					  <text><b> 22 + 32 = </b></text>
+					  <input  autocomplete = "off" class = "math-input" name="answer"><br>	
+					</div>	
+						
+					  <button class = "submit-button" type="submit">Отправить</button>
+					</form>
+
+				</div>
+			</div>
+		 </div>
+<script>
+function myMap() {
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {
+    center: new google.maps.LatLng(48.4624412, 34.8602743), zoom:9
+  };
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCu0BdmoGaoMkeqEZBGvirEtzA7wOSxcQk&callback=myMap" async defer></script>
+
+{% endblock %}
