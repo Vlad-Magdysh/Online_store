@@ -32,7 +32,7 @@ class Validate:
     @staticmethod
     def password(password: str):
         user_password = password.strip()
-        if re.match(r'[A-Za-z0-9@#$%^&+=]{8,}', user_password):
+        if re.match(r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", user_password):
             return True
 
 

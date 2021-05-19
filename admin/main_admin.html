@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/static/css/admin_styles.css">
+	<title>Document</title>
+</head>
+<body>
+	<div class="nav-block">
+	<nav class = "top-nav">
+		<a class="guide" href="{{ url_for('admin.all_products') }}">Склад товаров</a>
+		<a class="guide" href="">Добавить товар</a>
+	</nav>
+	</div>
+	<div class="data-block">
+		<h1 align="center">Все заказы</h1>
+		<table id="orders-table">
+			<tr style="font: 22px 'Trebuchet MS', 'Lucida Sans';">
+				<td width="50px;">ID</td>
+				<td width="300px;">Эл.почта пользователя</td>
+				<td width="150px;">Статус: </td>
+			</tr>
+			{% for item in orders %}
+			<tr class="order-item">
+				<td><a class="order-link" href="/admin/id-{{item.id}}-{{item.user_email}}">{{item.id}}</a></td>
+				<td>{{item.user_email}}</td>
+					{% if item.status == 0 %}
+					<td>Не готов</td>
+					{% elif item.status == 1 %}
+					<td>В пути</td>
+					{% elif item.status == 2 %}
+					<td>Готово</td>
+					{% elif item.status == 3 %}
+					<td>Отменён</td>
+					{% endif %}
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="data-block">
+		<h1 align="center">Все письма</h1>
+		<table id="support-table">
+			<tr>
+				<td width="200px;">Email</td>
+				<td width="400px;">Описание</td>
+			</tr>
+			{% for letter in letters %}
+			<tr class="letter-item">
+				<td>{{letter.user_email}}</td>
+				<td>{{letter.description}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/static/css/admin_styles.css">
+	<title>Document</title>
+</head>
+<body>
+	<div class="link-button-block">
+		<button>Сохранить изменения</button>
+		<a style="margin-top: 10px;" class="guide" href="{{ url_for('admin.main_admin') }}">Главная</a>
+	</div>
+	<div class="order-wrapper">
+		<div class="about-user-block">
+			<p>Имя: <span class="user-data-span">  {{user.name}}</span></p>
+			<p>Фамилия: <span class="user-data-span">  {{user.surname}}</span></p>
+			<p>Город: <span class="user-data-span">  {{user.city}}</span></p>
+			<p>Почтовый индекс: <span class="user-data-span">{{user.mail_index}}</span></p>
+			<p>Эл.почта: <span class="user-data-span">  {{user.email}}</span></p>
+			<p>Номер телефона:<span class="user-data-span">  {{user.phone}}</span></p>
+			<p>ID: <span class="order-data-span">  {{id_}}</span></p>
+			<p>Статус: 
+				<span class="order-data-span">
+				{% if status == 0 %}
+					<td>Не готов</td>
+					{% elif status == 1 %}
+					<td>В пути</td>
+					{% elif status == 2 %}
+					<td>Готово</td>
+					{% elif status == 3 %}
+					<td>Отменён</td>
+					{% endif %}
+				</span>
+			</p>
+		</div>
+		<div class="about-order-block">
+				<table style="text-align: center;" border="1px solid grey">
+					<tr style="height: 70px;">
+						<td width="50px">ID</td>
+						<td width="150px">Категория</td>
+						<td width="270px">Название</td>
+						<td width="100px">Количество</td>
+						<td width="180px">Сумма</td>
+					</tr>
+					{% for item in products %}
+					<tr class="item-row">
+						<td class="item-column">{{item.id}}</td>
+						<td class="item-column">{{item.category}}</td>
+						<td class="item-column">{{item.name}}</td>
+						<td class="item-column">{{item.number}}</td>
+						<td class="item-column">{{item.total}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+			<p style="font-size: 24px;">Сумма: <span class="order-data-span">{{order_price}} </span> грн</p>
+		</div>
+	</div>
+
+</body>
+</html>

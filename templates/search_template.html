@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="static/css/search_styles.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="catalog-block">
+			<p id="products_counter">Найдено <span style="color: red;">{{ len }}</span> подходящих товаров </p>
+				<div class="items-container">
+					{% for item in result %}
+					<div class="product-item">
+					<a href="/product-{{item.id}}" class="product-link">
+						<div class="product-link-body">
+							<img src="static/css/images/{{ item.image }}" alt="">
+							<p class="product-name">{{ item.name }}</p>
+							<p class="product-price" value="{{ item.price }}">{{ item.price }}.00 грн</p>
+						</div>
+					</a>
+					</div>
+			        {% endfor %}
+				</div>
+			</div>
+
+
+{% endblock %}

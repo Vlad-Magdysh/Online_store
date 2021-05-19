@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/static/css/admin_styles.css">
+	<title>Document</title>
+</head>
+<body>
+	<div class="about-products-block">
+		<form action="{{url_for('admin.all_products')}}" method="POST">
+				<table style="text-align: center;" border="1px solid grey">
+					<tr style="height: 70px;">
+						<td width="50px">ID</td>
+						<td width="150px">Категория</td>
+						<td width="270px">Название</td>
+						<td width="100px">Цена</td>
+						<td width="180px">Количество</td>
+						<td width="180px">Страна</td>
+						<td width="320px">Описание</td>
+					</tr>
+					{% for item in products %}
+					<tr class="item-row">
+						<td class="item-column">{{item.id}}</td>
+						<td class="item-column">{{item.category}}</td>
+						<td class="item-column">{{item.name}}</td>
+						<td class="item-column">{{item.price}}</td>
+						<td class="item-column"><input style="width: 170px;" id="{{item.id}}" name="{{item.id}}" type="text" value="{{item.quantity}}"></td>
+						<td class="item-column">{{item.country}}</td>
+						<td class="item-column">{{item.description}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+				<div class="link-button-block">
+				<button>Сохранить изменения</button>
+				<a style="margin-top: 10px;" class="guide" href="{{ url_for('admin.main_admin') }}">Главная </a>
+				</div>
+			</form>
+		</div>
+</body>
+</html>

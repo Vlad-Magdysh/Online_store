@@ -9,25 +9,35 @@
 	<link rel="stylesheet" href="static/css/base_styles.css">
     {% block styles %} {% endblock %} 		
         <script type="text/javascript">
-            function user_background()
+            async function user_background()
             {
                 if (sessionStorage.getItem('logged_in'))
                 {
                     document.getElementById('logout').style.display = 'block';
                     document.body.style.background = '#F4C00A22';
                 }
+                else{
+                    let responce = await fetch('{{url_for('user_logged_in')}}', )
+                    if(responce.status == 200)
+                    {
+                        sessionStorage.setItem('logged_in', true);
+                        document.getElementById('logout').style.display = 'block';
+                    document.body.style.background = '#F4C00A22';
+                    }
+                }
             }
-            function logout()
+            async function logge_out()
             {
                 document.getElementById('logout').style.display = 'none';
                 document.body.style.background = 'white';
                 sessionStorage.removeItem('logged_in');
+                let responce = fetch('{{url_for('user_logged_out')}}', {method: "POST"})
             }
             window.onload = user_background;
         </script>
      </head>
  
-<body scroll = "yes" onLoad="user_background()">
+<body scroll = "yes">
 
     <header>
         <div title = "Школьная полка" class = "school-shelf"><!--Not empty block--></div>       
@@ -35,11 +45,11 @@
             <a href="/" class="guide">Главная</a>
             <a href="/delivery-info" class="guide">Оплата/Доставка</a>
             <a href="/news" class="guide">Новости</a>
-            <button type="button" id="logout" onclick="logout()">Выйти</button>     	
-			<form action="" class="search">
-				<input type="text" value autocomplete="off" placeholder="Поиск товара">
+            <form action=""><button type="button" id="logout" onclick="logge_out()">Выйти</button> </form>     	
+			<form action="{{url_for('search_result')}}" method="POST" class="search">
+				<input type="text" id="product_name" name="product_name" value autocomplete="off" placeholder="Поиск товара">
 				<button type="submit" value = "Поиск"><i class="fa fa-search"></i></button>
-		</form>			
+		    </form>			
 		</nav>	
 		<div class="users-icons">
 			<figure class = "figure-icons">

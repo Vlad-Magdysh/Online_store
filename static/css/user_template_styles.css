@@ -1,3 +1,7 @@
+button: hover
+{
+	cursor: pointer;
+}
 
 .stationery-image{
 	width:300px;
@@ -20,12 +24,14 @@
 	font-weight:bold;
 }
 .button-taker{
-	width:100%;
+	margin: 0 auto;
+	max-width:500px;
+	width: 100%;
 	display:flex;
 	flex-wrap: wrap;
 	flex-direction:row;
 	align-items: center;
- 	justify-content: center;
+ 	justify-content: space-between;
 }
 
 .user-avatar{
@@ -37,22 +43,22 @@
 	margin-top:-2%;
 }
 
-.order-table{
+#order-table{
 	font-size:1.5em;
 	display: none;
 	margin: 0 auto;
+	border: 2px solid grey;
 }
 
-.button-taker input{
+.button-taker button{
+	display: block;
 	font-size:1.5em;
-	padding: 10px;
+	height: 50px;
+	width: 200px;
 	background-color: #70ccc8;
 	color:white;
 	border:none;
-	margin:3%;
-	width:300px;
 }
-
 
 .user-line{
 	font-size:1.7em;

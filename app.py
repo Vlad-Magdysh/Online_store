@@ -1,38 +1,16 @@
-from flask import Flask, render_template, g, request, session, redirect, url_for, flash, abort
-import sqlite3 as sq
+from flask import Flask, render_template, g, request, session, redirect, url_for, flash, abort, jsonify, Blueprint
+from flask_cors import CORS
 from Validator.user_validate import Validate
-
+from admin_blueprint import admin
+from Database.db_utils import get_db
 DATABASE = 'production.sqlite'
 DEBUG = True
 SECRET_KEY = b'\xa7\xf9\x85\xac \x85\xccL\xeb\xb8\xcd\xcb\xe7Ey\xeb\xc1\xa2~E'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
-
-def dict_factory(cursor, row):
-    """
-    Format sqlite row to dictionary
-    :param cursor: cursor for the connection to sqlite database
-    :param row: sqlite row
-    :return: Dictionary representation of a row
-    """
-    items = {}
-    for idx, col in enumerate(cursor.description):
-        items[col[0]] = row[idx]
-    return items
-
-
-def get_db():
-    """
-    Return the connection if it exists in the application context,
-    else - connects to the database, writes to application context and then return connection
-    :return: Connection - SQLite database connection object
-    """
-    if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = sq.connect(app.config['DATABASE'])
-        g.sqlite_db.row_factory = dict_factory
-    return g.sqlite_db
+app.register_blueprint(admin)
+CORS(app)
 
 
 @app.teardown_appcontext
@@ -132,10 +110,9 @@ def product(id_):
 @app.route('/basket', methods=['GET', 'POST'])
 def basket():
     if request.method == "GET":
-        selected = {}
         selected = dict(session.items())
-        if selected.get('logged_in'):
-            selected.pop('logged_in')
+        selected.pop('logged_in', True)
+        selected.pop('admin', True)
         ids = selected.keys()
         query = f"""
         SELECT *
@@ -217,27 +194,30 @@ def registration():
                 """
                 db_cursor.execute(query)
                 get_db().commit()
-                session['logged_in'] = {'email': {email}}
+                session['logged_in'] = {'email': email}
                 return redirect(url_for('user', email=email))
         return redirect(url_for('registration'))
 
 
-@app.route('/authorization', methods=['POST'])
+@app.route('/authorization', methods=['GET', 'POST'])
 def authorization():
-    fields = request.form.to_dict()
-    query = f"""
-    SELECT email
-    FROM users
-    WHERE email = '{fields.get('email')}' and password == '{fields.get('password')}'
-    """
-    db_cursor = get_db().cursor()
-    db_cursor.execute(query)
-    if result := db_cursor.fetchone():
-        session['logged_in'] = {'email': {result['email']}}
-        return redirect(url_for('user', email=result['email']))
-    else:
-        flash("Неверные данные!")
-        redirect(url_for('registration'))
+    if request.method == 'GET':
+        return redirect(url_for('registration'))
+    elif request.method == 'POST':
+        fields = request.form.to_dict()
+        query = f"""
+        SELECT email
+        FROM users
+        WHERE email = '{fields.get('email')}' and password == '{fields.get('password')}'
+        """
+        db_cursor = get_db().cursor()
+        db_cursor.execute(query)
+        if result := db_cursor.fetchone():
+            session['logged_in'] = {'email': result['email']}
+            return redirect(url_for('user', email=result['email']))
+        else:
+            flash("Неверные данные!")
+    return redirect(url_for('registration'))
 
 
 @app.route('/user-<email>', methods=['GET', "POST"])
@@ -263,6 +243,68 @@ def user(email):
                 return render_template('user_template.html', person=person, orders=orders)
         else:
             abort(404)
+    elif request.method == "POST":
+        return render_template(url_for('news'))
+
+
+@app.route('/logged_in', methods=['GET', 'POST'])
+def user_logged_in():
+    if session.get('logged_in'):
+        return jsonify(logged_in=True)
+    else:
+        return {"logged_in": False}, 204
+
+
+@app.route('/logged_out', methods=['POST'])
+def user_logged_out():
+    if session.get('logged_in'):
+        session.pop('logged_in', None)
+        return {'message': 'User logged out'}, 200
+    else:
+        return {'message': 'User was not logged in'}, 200
+
+
+@app.route('/search-result', methods=['POST'])
+def search_result():
+    if (field := request.form.get('product_name')):
+        query = f"""
+        SELECT * 
+        FROM products
+        WHERE name LIKE '%{field}%'
+        """
+    else:
+        query = f"""
+        SELECT *
+        FROM products
+        """
+
+    db_cursor = get_db().cursor()
+    db_cursor.execute(query)
+    result = db_cursor.fetchall()
+    for product_ in result:
+        product_['image'] = f"{product_['category']}/{product_.get('image', '')}"
+    return render_template('search_template.html', result=result, len=len(result))
+
+
+@app.route('/make-order', methods=['POST'])
+def make_order():
+    if email := session.get('logged_in'):
+        email = email['email']
+        fields = {f"{key.removeprefix('prod_number_')}": value for key, value in request.form.items()}
+        if not fields:
+            abort(404)
+        description = '\n'.join([f"{key} = {value}" for key, value in fields.items()])
+        query = f"""
+        INSERT INTO orders
+        (user_email, description, summary, status)
+        VALUES ('{str(email)}', '{description}', 0, 0)
+        """
+        db_cursor = get_db().cursor()
+        db_cursor.execute(query)
+        get_db().commit()
+        session.clear()
+        session['logged_in'] = {'email': email}
+        return redirect(url_for('main_app'))
 
 
 if __name__ == '__main__':

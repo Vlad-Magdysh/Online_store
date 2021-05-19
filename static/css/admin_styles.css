@@ -1,0 +1,222 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+#auth-block{
+	width: 320px;
+	margin: 10% auto;
+	background-color: lightgray;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+.input-par input{
+	display: block;
+	margin: 20px auto;
+	width: 220px;
+	font-size: 22px;
+	border-radius: 2px;
+	background-color: white;
+}
+
+#login_button{
+	font-size: 18px;
+	display: block;
+	margin: 30px auto;
+	width: 150px;
+	height: 60px;
+	border: none;
+	background-color: blue;
+	color: white;
+}
+
+#login_button:hover{
+	cursor: pointer;
+	border: 1px solid white;
+}
+
+.data-block{
+	width: 100%;
+	max-width: 500px;
+	margin: 40px auto; 
+}
+
+#orders-table
+{
+	border: 2px solid grey;
+	border-radius: 2px;
+	text-align: center;
+}
+
+.order-item{
+	font: 20px 'Trebuchet MS', 'Lucida Sans';
+	color: #191919FF;
+	border: 2px solid grey;
+}
+
+.order-item td{
+	border: 2px dashed grey;
+	height: 40px;
+}
+
+.order-link{
+	padding: 8px;
+	user-select: none;
+	text-decoration: none;
+}
+
+.order-link:hover {
+	text-decoration: underline;
+}
+
+#support-table{
+	border: 2px solid lightblue;
+	text-align: center;
+}
+
+.letter-item{
+	font: 18px 'Trebuchet MS', 'Lucida Sans';
+	color: #191919FF;
+	border: 2px dashed lightblue;
+}
+
+.letter-item td{
+	border: 2px dashed lightblue;
+}
+
+.order-wrapper{
+	width: 100%;
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.about-user-block
+{
+	width: 400px;
+	height: 450px;
+	font: 24px 'Georgia';
+	color: #054A6AFF;
+	background-color: #E5E5E5FF;
+	border-radius: 5px;
+	border-left: 2px solid grey;
+	margin-bottom: 50px;
+}
+
+.about-user-block p{
+	margin: 20px 5px;
+}
+
+.user-data-span
+{
+	font: 22px 'Trebuchet MS', 'Lucida Sans';
+	color: black;
+	white-space: pre-wrap;
+}
+
+.about-order-block{
+	width: 750px;
+	font: 22px 'Trebuchet MS', 'Lucida Sans';
+
+}
+
+.order-data-span{
+	font: 28px 'Trebuchet MS', 'Lucida Sans';
+	color: #DB233AFF;
+}
+
+.item-row{
+	height: 60px; 
+}
+
+.top-nav
+{
+	width: 100%;
+	display: inline-flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.nav-block{
+	width: 500px;
+	margin: 20px auto;
+}
+
+.guide{
+	display: block;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	max-height: 28px;
+	text-align:center;
+	font-size: 24px;
+	text-decoration: none;
+	background:#EC8989;
+	padding: 0.6vw;
+	color:white;
+	transition: all .3s ease-out;
+}
+
+.guide:hover{
+	background-color: IndianRed;
+}
+
+.about-products-block
+{
+	width: 1250px;
+	margin: 0 auto;
+	font: 22px 'Trebuchet MS', 'Lucida Sans';
+}
+
+.link-button-block{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.link-button-block button{
+	display: block;
+	margin: 20px 0;
+	width: 300px;
+	height: 50px;
+	font-size: 28px;
+	background-color: #4ec9bc;
+	color: white;
+	border: none;
+}
+
+.link-button-block button:hover{
+	border: 2px solid grey;
+}
+
+.long-form{
+	width:400px;
+	background-color: white;
+	color: black;
+	padding-left: 10px;
+}
+
+.add-product-block
+{
+	width: 600px;
+	height: 450px;
+	font: 22px 'Georgia';
+	color: #054A6AFF;
+	background-color: #E5E5E5FF;
+	border-radius: 5px;
+	border-left: 2px solid grey;
+	margin: 20px auto;
+}
+
+.field-name{
+	margin: 10px 0;	
+}
+
+.field-name input{
+	background-color: white;
+	color: black;
+	padding-left: 10px;
+}

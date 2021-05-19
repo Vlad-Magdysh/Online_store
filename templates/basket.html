@@ -5,7 +5,67 @@
 	{% endblock %}
 	
 	{% block content %}
-		 <div class = "main-body">
+	<script type="text/javascript">
+
+		function CheckSum()
+		{
+			var table = document.getElementById('goods-table');
+			var row_len = table.rows.length;
+			var sum = 0;
+			for(i = 1; i < row_len; i++)
+			{
+				console.log(table.rows[i].cells[3].textContent);
+				sum += Number(table.rows[i].cells[3].textContent);
+			}
+			document.getElementById('outcome-price').textContent = String(sum) + '.00'
+		}
+
+		function CheckPrice(id)
+		{
+			var quantity = Number(document.getElementById('prod_number_'+id).value);
+			var one_price = Number(document.getElementById('price-'+ id).textContent);
+			document.getElementById('price-script-'+id).textContent = String(quantity * one_price)+".00"
+			CheckSum();
+		}
+		function CounterUp(id)
+		{
+			if(Number(document.getElementById('counter-up-'+id).value) > Number(document.getElementById('prod_number_'+id).value))
+			{
+				document.getElementById('prod_number_'+id).value = Number(document.getElementById('prod_number_'+id).value) +1;
+			}
+			CheckPrice(id);
+		}
+
+		function CounterDown(id)
+		{
+			if (Number(document.getElementById('prod_number_'+id).value) > 1)
+			{
+				document.getElementById('prod_number_'+id).value = Number(document.getElementById('prod_number_'+id).value) - 1;
+				CheckPrice(id);
+			}
+		}
+
+		function CheckBasket()
+		{
+			var table = document.getElementById('goods-table');
+			if (sessionStorage.getItem('logged_in')) {
+				document.getElementById('author-button').style.display = 'none';
+				if(table.rows.length > 1) {
+					document.getElementById('order-button').style.display = 'block';
+				}
+				else {
+					document.getElementById('order-button').style.display = 'none';
+				}
+			}
+			else{
+				document.getElementById('author-button').style.display = 'block';
+				document.getElementById('order-button').style.display = 'none';
+			}
+			user_background();
+		}
+		window.onload = CheckBasket;
+	</script>
+		 <div class = "main-body" >
 
 		 	<h2 class = "basket-script">Корзина</h2>
 
@@ -14,10 +74,10 @@
 					<span class = "ready-button">Готовые к заказу({{ len }})</span>
 				</span>
 			</div> 
+			<form style="display: block; width: 100%;" action="/make-order" method="POST">
+			<table border = "1" width = "100%" id = "goods-table" >
 
-			<table border = "1" class = "goods-table" width = "100%">
-
-				<tr width = "100%">
+				<tr class="decor" width = "100%">
 					<td class = "long-column">
 						<h3>Товары</h3>
 					</td>
@@ -42,7 +102,7 @@
 				<tr>
 					<td class = "long-white-column">
 						<div class = "good-taker">
-							<img class = "diary-img" src = "static/css/images/{{item.image}}"/>
+							<img class = "diary-img" onload="CheckPrice('{{item.id}}')" src = "static/css/images/{{item.image}}"/>
 								<div class = "good-container">
 									<h3 align = "left"><font color = "#6f8da9">{{item.name}}<br>Страна: {{item.country}}</h3>							
 								</font>
@@ -52,8 +112,8 @@
 
 					<td valign="top" class = "short-white-column">
 						<div class = "price-taker">
-							<h3 class = "price-script">{{item.price}}</h3>
-							<h3 class = "price-script"> грн</h3>
+							<h3 style = "font-size:1.6em; color:#cf9294;" value = "{{item.price}}" id = "price-{{ item.id }}">{{item.price}}.00</h3>
+							<h3 style = "font-size:1.6em; color:#cf9294;" > грн</h3>
 						</div>
 					</td>
 
@@ -63,9 +123,9 @@
 								<div class = "amount-block">
 									<p id="counter">
 									Количество:
-									<input id="prod_number" name="prod_number" type="text" value="{{item.number}}">
-								<button type="button" onclick="CounterUp()" id="counter-up" value="{{item.quantity}}">+</button>
-								<button type="button" onclick="CounterDown()" id="counter-down">-</button>
+									<input id="prod_number_{{ item.id }}" name="prod_number_{{ item.id }}" type="text" value="{{item.number}}">
+								<button type="button" onclick="CounterUp('{{ item.id }}')" id="counter-up-{{ item.id }}" value="{{item.quantity}}">+</button>
+								<button type="button" onclick="CounterDown('{{ item.id }}')" id="counter-down-{{ item.id }}">-</button>
 									шт
 									</p>
 
@@ -82,8 +142,7 @@
 
 					<td valign="top" class = "short-white-column">
 						<div class = "sum-taker">
-							<h3 class = "price-script"> 10.00</h3>
-							<h3 class = "price-script"> грн</h3>
+							<h3 style = "font-size:1.6em; color:#cf9294;" id= "price-script-{{item.id}}"> 00.00</h3>
 						</div>
 					</td>
 
@@ -97,30 +156,12 @@
 			</table>
 
 			<div class = "report-block">
-				<button class = "report-button"><a href = "Contacts.html" id= "report-link">Сообщить об ошибке</button></a>
+				<button id="order-button" type="submit">Оформить заказ</button>
+				<a href="{{ url_for('registration') }}" id="author-button" >Регистрация/Авторизация</a>
 				<span>
-					<text class = "outcome-script"><b>Итого:</b></text><text class = "outcome-price"> 29.30</text><text class = "uah"> грн.</text>
+					<text class = "outcome-script"><b>Итого: </b></text><text id= "outcome-price"> 00.00</text><text class = "uah"> грн.</text>
 				</span>
 			</div>
-
-			<button class = "min-order" align = "right">Минимальный заказ на сумму от 100 грн. Вас осталось добрать ещё 70.7 грн.</button>
+			</form>
 		</div>
-	<script>
-				
-		function CounterUp()
-		{
-			if(Number(document.getElementById('counter-up').value) > Number(document.getElementById('prod_number').value))
-			{
-				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) +1;
-			}
-		}
-
-		function CounterDown()
-		{
-			if (Number(document.getElementById('prod_number').value) > 1)
-			{
-				document.getElementById('prod_number').value = Number(document.getElementById('prod_number').value) - 1;
-			}
-		}
-	</script>
 {% endblock %}

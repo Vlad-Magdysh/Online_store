@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/static/css/admin_styles.css">
+	<title>Document</title>
+</head>
+<body>
+	<form action="">
+		<div class="add-product-block">
+			<p class="field-name">ID: <input type="text" name="id"></p>
+			<p class="field-name">Фото: <input type="text" name="image"></p>
+			<p class="field-name">Категория<input type="text" name="category"></p>
+			<p class="field-name">Название<input type="text" name="name"></p>
+			<p class="field-name">Цена<input type="text" name="price"></p>
+			<p class="field-name">Количество<input type="text" name="quantity"></p>
+			<p class="field-name">Страна<input type="text" name="coutnry"></p>
+			<p class="field-name">Описание <br/> <textarea class = "long-form" autocomplete = "off" name="description"> </textarea></p>
+		</div>
+		<div class="link-button-block">
+		<button>Добавить продукт</button>
+		<a style="margin-top: 15px;" class="guide" href="{{ url_for('admin.main_admin') }}">Главная</a>
+	</div>
+	</form>
+</body>
+</html>

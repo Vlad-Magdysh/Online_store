@@ -50,3 +50,8 @@ CREATE TABLE filters(
   name TEXT NOT NULL ,
   weight TEXT
 );
+
+CREATE TABLE admins (
+    admin_email TEXT NOT NULL ,
+    password TEXT NOT NULL
+);

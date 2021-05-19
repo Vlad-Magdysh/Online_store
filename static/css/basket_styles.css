@@ -79,7 +79,7 @@ td{
 	width:100%;
 }
 
-.price-script{
+#price-script{
 	font-size:1.6em;
 	 color:#cf9294;
 }
@@ -101,7 +101,7 @@ td{
 	float:right;
 }
 
-.goods-table h3{
+.decor h3{
 	float:left;
 	margin:2%;
 	width:100%;
@@ -211,11 +211,29 @@ td{
 	align-items: center;
 	justify-content:space-between;
 	width:100%;
-	margin-top:12%;
-	height:15%;
+	margin: 20px 0px;
 }
 
-.min-order{
+#order-button
+{
+	height: 50px;
+	width: 200px;
+	font-size: 24px;
+	border:none;
+	background:#4ec9bc;
+	color:white;
+}
+
+#author-button{
+	padding: 10px 30px;
+	font-size: 24px;
+	text-decoration: none;
+	border:none;
+	background:#4ec9bc;
+	color:white;
+}
+
+#min-order{
 	margin-left:4%;
 	margin-bottom:2%;
 	width:950px;
@@ -228,9 +246,10 @@ td{
 
 .outcome-script{
 	font-size: 1.8em;
+	padding-right: 5px;
 }
 
-.outcome-price{
+#outcome-price{
 	font-size:2.6em;
 	color:#e39794
 }

@@ -6,19 +6,22 @@
 
 {% block content %}
 	 <script type="text/javascript">
-		  history_button.onclick = function() {
-			 	if(document.getElementById('order-table').style.display == 'block')
-				{
-					document.getElementById('order-table').style.display = 'none';
-				}
-				else{
-				document.getElementById('order-table').style.display = 'block';
-				}
-		  };
+		function ShowHistory(){
+			if(document.getElementById('order-table').style.display == 'block') {
+			document.getElementById('order-table').style.display = 'none';
+			}
+			
+			else{
+			document.getElementById('order-table').style.display = 'block';
+			}
+		};
+		
+		window.onload = function(){ 
+		  	sessionStorage.setItem('logged_in', true);
+		  	user_background();
+		  	document.getElementById('logout').style.display = 'none';
+		}
 
-		   delete_button.onclick = function() {
-		   	var win = window.open('Pop_up.html', 'Are you shure?', 'width=500, height=200');
-		  };
 	</script>
 		<div class = "main-body">
 			<img title = "User_Avatar" class = "user-avatar" src = "css_files\images\user_page\user.png">
@@ -28,10 +31,9 @@
 					<text class = "user-line">Город:<i>{{ person.city }}</i>, Почтовый индекс:<i>{{ person.mail_index }}</i></text>
 
 					<div class = "button-taker">
-						<input id="history_button" type="button" value="История заказов">
-						<input id="delete_button" type="button" value="Удалить аккаунт">
+						<button id="history_button" type="button" onclick="ShowHistory()">История заказов</button>
+						<button id="delete_button" type="button">Удалить аккаунт</button>
 					</div>
-
 					<table id="order-table" width="320px">
 						<tr>
 							<td>Номер заказа</td>
