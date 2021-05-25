@@ -24,7 +24,7 @@ button: hover
 	font-weight:bold;
 }
 .button-taker{
-	margin: 0 auto;
+	margin: 20px auto;
 	max-width:500px;
 	width: 100%;
 	display:flex;
@@ -34,20 +34,13 @@ button: hover
  	justify-content: space-between;
 }
 
-.user-avatar{
-	position: absolute;
-	width:11%;
-	align-self: flex-start;
-	align-items: flex-start;
-	margin:2%;
-	margin-top:-2%;
-}
 
 #order-table{
 	font-size:1.5em;
 	display: none;
-	margin: 0 auto;
+	margin: 20px auto;
 	border: 2px solid grey;
+	text-align: center;
 }
 
 .button-taker button{

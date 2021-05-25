@@ -51,7 +51,7 @@ def news():
     return render_template('news.html', posts=posts)
 
 
-@app.route('/catalog-<string:product_type>', methods=['GET'])
+@app.route('/catalog-<string:product_type>', methods=['GET', 'POST'])
 def catalog(product_type):
     query = f"""
     SELECT weight, name 
@@ -69,19 +69,53 @@ def catalog(product_type):
     """
     db_cursor.execute(query)
     countries = db_cursor.fetchall()
+    url_catalog = f'/catalog-{product_type}'
+    if request.method == "GET":
+        query = f"""
+        SELECT id, image, name, price
+        FROM products
+        WHERE category== '{product_type}'
+        """
+        db_cursor.execute(query)
+        products = db_cursor.fetchall()
 
-    query = f"""
-    SELECT id, image, name, price
-    FROM products
-    WHERE category== '{product_type}'
-    """
-    db_cursor.execute(query)
-    products = db_cursor.fetchall()
+        for item in products:
+            item['image'] = f"{product_type}/{item.get('image', '')}"
 
-    for item in products:
-        item['image'] = f"{product_type}/{item.get('image', '')}"
-
-    return render_template("catalog_template.html", kinds=kinds, countries=countries, products=products)
+        return render_template("catalog_template.html", kinds=kinds, countries=countries,
+                               products=products, url_catalog=url_catalog)
+    elif request.method == "POST":
+        fields = request.form.to_dict()
+        if not (lower_price := fields.get('lower_price')):
+            lower_price = 0
+        if not (upper_price := fields.get('upper_price')):
+            upper_price = 99999
+        selected_kinds = [item.removeprefix('kind-') for item in fields.keys() if item.startswith('kind-')]
+        query = f"""
+        SELECT * 
+        FROM products
+        WHERE category == '{product_type}'
+        AND
+        price BETWEEN {lower_price} and {upper_price}
+        """
+        if selected_kinds:
+            str_kinds = '\' , \''.join(selected_kinds)
+            query += f"""AND
+        filters in ('{str_kinds}')
+            """
+        selected_counties = [item.removeprefix('country-') for item in fields.keys() if item.startswith('country-')]
+        if selected_counties:
+            str_counties = '\' , \''.join(selected_counties)
+            query += f"""AND
+        country in ('{str_counties}')
+            """
+        print(query)
+        db_cursor.execute(query)
+        products = db_cursor.fetchall()
+        for item in products:
+            item['image'] = f"{product_type}/{item.get('image', '')}"
+        return render_template("catalog_template.html", kinds=kinds, countries=countries,
+                               products=products, url_catalog=url_catalog)
 
 
 @app.route('/product-<id_>', methods=['GET', 'POST'])
@@ -119,7 +153,6 @@ def basket():
         FROM products
         WHERE id in ({', '.join([item for item in ids])})
         """
-        print(query)
         db_cursor = get_db().cursor()
         db_cursor.execute(query)
         products = db_cursor.fetchall()
@@ -127,6 +160,11 @@ def basket():
             product_['image'] = f"{product_['category']}/{product_.get('image', '')}"
             product_['number'] = selected[f'{product_["id"]}']
         return render_template("basket.html", products=products, len=len(products))
+    elif request.method == "POST":
+        fields = request.form.to_dict()
+        value = list(fields.values())[0]
+        session.pop(value, None)
+        return redirect(url_for('basket'))
 
 
 @app.route('/contact-us', methods=['GET', 'POST'])
@@ -144,7 +182,6 @@ def contact():
             INSERT INTO letters (user_name, user_phone, user_email, description, status)
             VALUES ('{request.form.get('name')}', '{request.form.get('phone')}', '{request.form.get('email')}', '{request.form.get('message')}', 0)
             """
-            print(query)
             db_cursor = get_db().cursor()
             db_cursor.execute(query)
             get_db().commit()
@@ -160,7 +197,6 @@ def registration():
         return render_template("registration_page.html")
     elif request.method == "POST":
         fields = request.form.to_dict()
-        print(fields)
         if not (name := fields.get('name')) or not Validate.name(name):
             flash("Неверно введено имя! Введите 1 слово с большой буквы.")
         elif not (surname := fields.get('surname')) or not Validate.name(surname):
@@ -302,9 +338,71 @@ def make_order():
         db_cursor = get_db().cursor()
         db_cursor.execute(query)
         get_db().commit()
+        for key, value in fields.items():
+            query = f"""
+            UPDATE products
+            SET quantity = quantity - {value}
+            WHERE id == {key}
+            """
+            db_cursor.execute(query)
+        get_db().commit()
         session.clear()
         session['logged_in'] = {'email': email}
         return redirect(url_for('main_app'))
+
+
+@app.route('/pop-up', methods=['GET', 'POST'])
+def delete_user():
+    if email := session.get('logged_in'):
+        if request.method == "GET":
+            return render_template('delete_pop_up.html')
+        elif request.method == "POST":
+            query = f"""
+            DELETE 
+            FROM users
+            WHERE email == '{email['email']}'
+            """
+            db_cursor = get_db().cursor()
+            db_cursor.execute(query)
+            get_db().commit()
+            query = f"""
+            DELETE 
+            FROM orders
+            WHERE user_email == '{email['email']}'
+            """
+            db_cursor.execute(query)
+            get_db().commit()
+            session.pop('logged_in')
+            return "Ok", 200
+
+
+@app.route('/order-<id_>', methods=['GET'])
+def view_order(id_):
+    if session.get('logged_in'):
+        query = f"""
+                    SELECT description, status
+                    FROM orders
+                    WHERE id == {id_}
+                    """
+        db_cursor = get_db().cursor()
+        db_cursor.execute(query)
+        order_ = db_cursor.fetchone()
+        archiver_data = order_['description'].split('\n')
+        archiver_data = {key: value for key, value in (item.split(' = ') for item in archiver_data)}
+        keys = archiver_data.keys()
+        query = f"""
+                    SELECT id, category, name, price
+                    FROM products
+                    WHERE id in ({', '.join([item for item in keys])})             
+                    """
+        db_cursor.execute(query)
+        products = db_cursor.fetchall()
+        order_price = 0
+        for item in products:
+            item['number'] = int(archiver_data[str(item['id'])])
+            item['total'] = item['number'] * item['price']
+            order_price += item['total']
+        return render_template('user_order_template.html', products=products, order_price=order_price)
 
 
 if __name__ == '__main__':

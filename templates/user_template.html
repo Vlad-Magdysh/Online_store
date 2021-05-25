@@ -22,26 +22,45 @@
 		  	document.getElementById('logout').style.display = 'none';
 		}
 
+		function DeleteWindow(){
+			sessionStorage.removeItem('logged_in');
+			var win = window.open('{{ url_for('delete_user') }}', 'Предупреждение!', 'width=600px,height=400px');
+
+		}
+
 	</script>
 		<div class = "main-body">
-			<img title = "User_Avatar" class = "user-avatar" src = "css_files\images\user_page\user.png">
 				<text class = "user-page-script">Страница пользователя</text>
-					<text class = "user-line">Имя:<i>{{ person.name }}</i>, Фамилия:<i>{{ person.surname }}</i></text>
-					<text class = "user-line">Почта:<i>{{ person.email }}</i>, Номер телефона:<i>{{ person.phone }}</i></text>
-					<text class = "user-line">Город:<i>{{ person.city }}</i>, Почтовый индекс:<i>{{ person.mail_index }}</i></text>
+					<text class = "user-line">
+						Имя:
+						<i>{{ person.name }}</i>, 
+						Фамилия:
+						<i>{{ person.surname }}</i>
+					</text>
+					<text class = "user-line">
+						Почта:
+						<i>{{ person.email }}</i>
+					</text>
+					<text class = "user-line">
+						Номер телефона:
+						<i>{{ person.phone }}</i>
+					</text>
+					<text class = "user-line">
+						Город:
+						<i>{{ person.city }}</i>, Почтовый индекс:<i>{{ person.mail_index }}</i></text>
 
 					<div class = "button-taker">
 						<button id="history_button" type="button" onclick="ShowHistory()">История заказов</button>
-						<button id="delete_button" type="button">Удалить аккаунт</button>
+						<button id="delete_button" type="button" onclick="DeleteWindow()">Удалить аккаунт</button>
 					</div>
-					<table id="order-table" width="320px">
+					<table id="order-table" width="400px">
 						<tr>
-							<td>Номер заказа</td>
-							<td>Статус</td>
+							<td width="180px;">Номер заказа</td>
+							<td width="220px;">Статус</td>
 						</tr>
 						{% for order in orders %}
 						<tr>
-							<td>Заказ №{{order.id}}</td>
+							<td>Заказ № <a href="/order-{{order.id}}">{{order.id}}</a></td>
 							{% if order.status == 0 %}
 							<td>Не готов</td>
 							{% elif order.status == 1 %}

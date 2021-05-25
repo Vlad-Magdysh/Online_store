@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		async function DeleteUser(){
+			let responce = await fetch('{{ url_for('delete_user') }}', {method: "POST"})
+			window.close();
+		}
+	</script>	
+</head>
+<body style="width: 500px; height: 200px;">
+	<h1 style="margin: 20px auto; text-align: center;">Вы точно хотите удалить аккаунт?</h1>
+	<form action="{{ url_for('delete_user') }}", method="POST">
+		<button type="submit" style="background-color: IndianRed; color = white; height: 40px; width: 60px; line-height: 40px; font-size: 20px; margin-left: 120px;" onclick="DeleteUser()" name="Yes">Да</button>
+		<button type="button" style="background-color: #39C594FF; color = white; height: 40px; width: 60px; line-height: 40px; font-size: 20px; margin-left: 120px;" onclick="window.close();" name="No">Нет</button>
+	</form>
+</body>
+</html>

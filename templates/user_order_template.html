@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="static/css/user_order_styles.css">
+{% endblock %}
+
+{% block content %}
+<main>
+	<div class="about-order-block">
+			<table style="text-align: center;" border="1px solid grey">
+				<tr style="height: 70px;">
+					<td width="50px">ID</td>
+					<td width="150px">Категория</td>
+					<td width="270px">Название</td>
+					<td width="100px">Количество</td>
+					<td width="180px">Сумма</td>
+				</tr>
+				{% for item in products %}
+				<tr class="item-row">
+					<td class="item-column">{{item.id}}</td>
+					<td class="item-column">{{item.category}}</td>
+					<td class="item-column">{{item.name}}</td>
+					<td class="item-column">{{item.number}}</td>
+					<td class="item-column">{{item.total}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		<p style="font-size: 24px;">Сумма: <span class="order-data-span">{{order_price}} </span> грн</p>
+	</div>
+</main>
+{% endblock %}

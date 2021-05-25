@@ -11,10 +11,13 @@
 		<article class="catalog-wrapper">
 			<div class="filter-block">
 				<p class="block-title">&nbsp&nbsp Фильтры: </p>
-				<form>
+				<form action="{{ url_catalog }}" method="POST">
 					<div class="price-block">
 						<p style="margin-top: 0px; border-bottom:0" class="filter-title">Цена</p>
-						<span class="price-line"> от: <input type="text" placeholder="0" class="price-input"> до: <input type="text" placeholder="99999" class="price-input"></span>
+						<span class="price-line"> 
+							от: <input name="lower_price" type="text" placeholder="0" class="price-input"> 
+							до: <input name="upper_price" type="text" placeholder="99999" class="price-input">
+						</span>
 					</div>
 					<div class="product-block">
 						<button type="button" class="filter-title open-list" onclick="ShowList(1)">Категории ▽ ▽ ▽</button>
@@ -22,19 +25,19 @@
 						
 						{% for kind in kinds %}
 						
-						<li class="flag"><input type="checkbox" class="check-filter" name="kind-{{ kind.weight }}"> {{ kind.name }}</li>
+						<li class="flag"><input type="checkbox" class="check-filter" name="kind-{{ kind.weight }}">{{ kind.name }}</li>
 
 						{% endfor %}
 
 						</ul>
 					</div>
 					<div class="trademark-block">
-						<button type="button" class="filter-title open-list" onclick="ShowList(2)">Торговые марки▽ ▽ ▽</button>
+						<button type="button" class="filter-title open-list" onclick="ShowList(2)">Страна▽ ▽ ▽</button>
 						<ul id="list2" class="list-filters" tabindex="1">
 
 						{% for country in countries %}
 						
-							<li class="flag"><input type="checkbox" class="check-filter" name="country-{{ country.weight }}">{{ country.name }}</li>
+							<li class="flag"><input type="checkbox" class="check-filter" name="country-{{ country.name }}">{{ country.name }}</li>
 						
 						{% endfor %}
 						</ul>
@@ -43,7 +46,7 @@
 					<!-- Тут будет JS функция для очистки всех chekbox-->
 						<button type="button" id="unchecked" onclick="UncheckAll()">Сбросить фильтры</button>
 					<!-- Тут будет запрос к базе и серверу для формирования каталога товаров соответственно новым фильтрам-->
-						<button type="button" id="pull-request" >Отправить</button>
+						<button type="submit" id="pull-request" >Отправить</button>
 					</div> 
 				</form>
 			</div>

@@ -146,6 +146,7 @@
 }
 
 .guide{
+	max-width: 200px;
 	display: block;
 	margin-bottom: 10px;
 	margin-right: 5px;
@@ -193,15 +194,18 @@
 }
 
 .long-form{
-	width:400px;
+	width:485px;
+	min-height: 150px;
 	background-color: white;
 	color: black;
+	margin-top: 20px;
 	padding-left: 10px;
+	font-size: 20px;
 }
 
 .add-product-block
 {
-	width: 600px;
+	width: 500px;
 	height: 450px;
 	font: 22px 'Georgia';
 	color: #054A6AFF;
@@ -215,8 +219,61 @@
 	margin: 10px 0;	
 }
 
-.field-name input{
+.field-input{
+	text-align:center;
 	background-color: white;
 	color: black;
-	padding-left: 10px;
+	float: right;
+	font: 22px 'Georgia';
+}
+
+.column-button-block{
+	width: 500px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.row-button-block{
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.button-save-change{
+	display: block;
+	margin: 20px 0;
+	width: 300px;
+	height: 50px;
+	font-size: 28px;
+	background-color: #4ec9bc;
+	color: white;
+	border: none;
+}
+
+.button-save-change:hover{
+	border: 2px solid grey;
+}
+
+#status{
+	font: 20px 'Georgia';
+	background-color: white;
+}
+
+#save-status-button{
+	height: 28px;
+	margin-left: 10px;
+	padding: 2px;
+	font: 18px 'Georgia';
+	background-color: #4ec9bc;
+	color: white;
+	border: none;
+}
+
+#save-status-button:hover{
+	border: 1px solid grey;
 }

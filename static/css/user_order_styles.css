@@ -1,0 +1,53 @@
+main{
+	min-height: 384px;
+}
+
+.data-block{
+	width: 100%;
+	max-width: 500px;
+	margin: 40px auto; 
+}
+
+.about-order-block{
+	margin:0 auto;
+	width: 750px;
+	font: 22px 'Trebuchet MS', 'Lucida Sans';
+	background-color: white;
+}
+
+#orders-table
+{
+	border: 2px solid grey;
+	border-radius: 2px;
+	text-align: center;
+}
+
+.order-item{
+	font: 20px 'Trebuchet MS', 'Lucida Sans';
+	color: #191919FF;
+	border: 2px solid grey;
+}
+
+.order-data-span{
+	font: 28px 'Trebuchet MS', 'Lucida Sans';
+	color: #DB233AFF;
+}
+
+.item-row{
+	height: 60px; 
+}
+
+.order-item td{
+	border: 2px dashed grey;
+	height: 40px;
+}
+
+.order-link{
+	padding: 8px;
+	user-select: none;
+	text-decoration: none;
+}
+
+.order-link:hover {
+	text-decoration: underline;
+}

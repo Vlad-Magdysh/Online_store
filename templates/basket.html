@@ -74,6 +74,8 @@
 					<span class = "ready-button">Готовые к заказу({{ len }})</span>
 				</span>
 			</div> 
+			<form id="delete" action="/basket" method="POST">
+			</form>
 			<form style="display: block; width: 100%;" action="/make-order" method="POST">
 			<table border = "1" width = "100%" id = "goods-table" >
 
@@ -148,7 +150,7 @@
 
 					<td valign="top" class = "short-white-column">
 						<div class = "action-taker">
-							<button class = "delete-button"><b>Удалить</b></button>
+							<button form="delete" name="delete-{{item.id}}" value="{{item.id}}" class = "delete-button" type="submit" ><b>Удалить</b></button>
 						</div>
 					</td>
 				</tr>

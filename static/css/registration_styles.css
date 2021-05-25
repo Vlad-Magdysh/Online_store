@@ -1,3 +1,7 @@
+main{
+	min-height: 500px;
+}
+
 .forms-block{
 	display: flex;
 	justify-content: center;
@@ -45,7 +49,7 @@
 
 }
 
-#submit-block
+.submit-block
 {
 	padding-left: 38%;
 	padding-bottom: 40px;
@@ -60,14 +64,14 @@
 	border-color: #9B9B9B;
 }
 
-#submit-authorization
-{
+#submit-authorization{
 	width: 150px;
 	padding: 4px 8px;
 	font-size:18px;
 	background-color: #64d1ca;
 	color:white;
 	border-color: #9B9B9B;
+	margin: 20px auto;
 }
 
 .field-title span{

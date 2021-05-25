@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, url_for, g, session, redirect, abort
+from flask import Blueprint, request, render_template, url_for, g, session, redirect, abort, flash
 from Database.db_utils import get_db
 
 admin = Blueprint('admin', __name__, template_folder='admin', url_prefix='/admin')
@@ -53,8 +53,8 @@ def main_admin():
 
 @admin.route('/id-<id_>-<email>', methods=['GET', 'POST'])
 def order(id_, email):
-    if request.method == "GET":
-        if session.get('admin'):
+    if session.get('admin'):
+        if request.method == "GET":
             query = f"""
             SELECT name, surname, city, mail_index, email, phone
             FROM users
@@ -89,8 +89,17 @@ def order(id_, email):
                 order_price += item['total']
             return render_template('order_template.html', user=user, products=products, order_price=order_price
                                    , status=order_['status'], id_=id_)
-    elif request.method == "POST":
-        pass
+        elif request.method == "POST":
+            status = request.form['status']
+            query = f"""
+            UPDATE orders
+            SET status={status}
+            WHERE id == {id_}
+            """
+            db_cursor = get_db().cursor()
+            db_cursor.execute(query)
+            get_db().commit()
+            return redirect(url_for('admin.order', id_=id_, email=email))
 
 
 @admin.route('/base-products', methods=['GET', 'POST'])
@@ -130,12 +139,11 @@ def add_product():
                 query = f"""
                 INSERT INTO products 
                 (image, category, name, price, quantity, country, description) 
-                VALUES ( '{fields['image']}', '{fields['category']}', '{fields['name']}'
-                , {fields['price']}, {fields['quantity']}, '{fields['country']}', '{fields['description']}' )
+                VALUES ( '{fields['image']}', '{fields['category']}', '{fields['name']}', {fields['price']}, {fields['quantity']}, '{fields['country']}', '{fields['description']}' )
                 """
                 db_cursor = get_db().cursor()
                 db_cursor.execute(query)
                 get_db().commit()
                 return redirect(url_for('admin.all_products'))
             else:
-                abort(404)
+                return redirect(url_for('admin.add_product'))

@@ -5,10 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/static/css/admin_styles.css">
 	<title>Document</title>
+	<script type="text/javascript">
+		function StatusSelection()
+		{
+			document.getElementById('{{status}}').selected = "selected";
+		}
+		window.onload = StatusSelection;
+	</script>
 </head>
 <body>
-	<div class="link-button-block">
-		<button>Сохранить изменения</button>
+	<div class="row-button-block">
+		<button class="button-save-change">Сохранить изменения</button>
 		<a style="margin-top: 10px;" class="guide" href="{{ url_for('admin.main_admin') }}">Главная</a>
 	</div>
 	<div class="order-wrapper">
@@ -21,17 +28,15 @@
 			<p>Номер телефона:<span class="user-data-span">  {{user.phone}}</span></p>
 			<p>ID: <span class="order-data-span">  {{id_}}</span></p>
 			<p>Статус: 
-				<span class="order-data-span">
-				{% if status == 0 %}
-					<td>Не готов</td>
-					{% elif status == 1 %}
-					<td>В пути</td>
-					{% elif status == 2 %}
-					<td>Готово</td>
-					{% elif status == 3 %}
-					<td>Отменён</td>
-					{% endif %}
-				</span>
+				<form action="/admin/id-{{id_}}-{{user.email}}" method="POST">
+				<select name="status" id="status">
+					<option id="0" value="0">Не готов</option>
+					<option id="1" value="1">В пути</option>
+					<option id="2" value="2">Готово</option>
+					<option id="3" value="3">Отменён</option>
+				</select>
+				<button id ="save-status-button" type="submit">Сохранить</button>
+				</form>
 			</p>
 		</div>
 		<div class="about-order-block">

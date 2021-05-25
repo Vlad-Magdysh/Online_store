@@ -7,19 +7,18 @@
 	<title>Document</title>
 </head>
 <body>
-	<form action="">
+	<form action="{{ url_for('admin.add_product') }}" method="POST">
 		<div class="add-product-block">
-			<p class="field-name">ID: <input type="text" name="id"></p>
-			<p class="field-name">Фото: <input type="text" name="image"></p>
-			<p class="field-name">Категория<input type="text" name="category"></p>
-			<p class="field-name">Название<input type="text" name="name"></p>
-			<p class="field-name">Цена<input type="text" name="price"></p>
-			<p class="field-name">Количество<input type="text" name="quantity"></p>
-			<p class="field-name">Страна<input type="text" name="coutnry"></p>
-			<p class="field-name">Описание <br/> <textarea class = "long-form" autocomplete = "off" name="description"> </textarea></p>
+			<p class="field-name">Фото: <input class="field-input" type="text" name="image" required></p>
+			<p class="field-name" required>Категория<input class="field-input" type="text" name="category"></p>
+			<p class="field-name" required>Название<input class="field-input" type="text" name="name"></p>
+			<p class="field-name" required>Цена<input class="field-input" type="text" name="price"></p>
+			<p class="field-name" required>Количество<input class="field-input" type="text" name="quantity"></p>
+			<p class="field-name" required>Страна<input class="field-input" type="text" name="country"></p>
+			<p class="field-name" required>Описание <br/> <textarea class = "long-form" autocomplete = "off" name="description"> </textarea></p>
 		</div>
-		<div class="link-button-block">
-		<button>Добавить продукт</button>
+		<div class="column-button-block">
+		<button class="button-save-change">Добавить продукт</button>
 		<a style="margin-top: 15px;" class="guide" href="{{ url_for('admin.main_admin') }}">Главная</a>
 	</div>
 	</form>

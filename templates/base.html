@@ -26,7 +26,7 @@
                     }
                 }
             }
-            async function logge_out()
+            async function log_out()
             {
                 document.getElementById('logout').style.display = 'none';
                 document.body.style.background = 'white';
@@ -45,7 +45,7 @@
             <a href="/" class="guide">Главная</a>
             <a href="/delivery-info" class="guide">Оплата/Доставка</a>
             <a href="/news" class="guide">Новости</a>
-            <form action=""><button type="button" id="logout" onclick="logge_out()">Выйти</button> </form>     	
+            <form action=""><button type="button" id="logout" onclick="log_out()">Выйти</button> </form>     	
 			<form action="{{url_for('search_result')}}" method="POST" class="search">
 				<input type="text" id="product_name" name="product_name" value autocomplete="off" placeholder="Поиск товара">
 				<button type="submit" value = "Поиск"><i class="fa fa-search"></i></button>
@@ -72,7 +72,7 @@
 <footer>
         <div class="footer-block our-adress">
             <p class="footer-category">Наш адресс</p>
-            <span class="footer-text">52001, г. Подгородное, ул.Геологов 193</span>
+            <span class="footer-text">52001, г. Подгородное, ул.Геологов 2341</span>
             <a href="https://www.google.com.ua/maps/@48.5463682,35.1647112,17z?hl=ru" class="footer-link">Смотреть на карте</a>
         </div>
         
